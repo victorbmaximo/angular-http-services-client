@@ -15,4 +15,12 @@ export class ProductsService {
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.url}/products`);
   }
+
+  getProductsErr(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.url}/productserr`);
+  }
+
+  getProductsDelay(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.url}/productsdelay`);
+  }
 }

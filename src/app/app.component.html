@@ -30,3 +30,27 @@
   <mat-card-footer>
   </mat-card-footer>
 </mat-card>
+
+
+<mat-card class="mat-elevation-z8" style="width: 300px; margin: 30px;">
+  <mat-card-header>
+    <mat-card-title>HTTP ERROR</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ul *ngIf="ProductsError">
+      <li *ngFor="let p of ProductsError">
+        {{p.name}}
+      </li>
+    </ul>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="getWithError()">
+      <mat-icon>swap_vert</mat-icon> Error Request
+    </button>
+    <button mat-button color="primary" (click)="getWithErrorOk()">
+      <mat-icon>swap_vert</mat-icon> Send Request
+    </button>
+  </mat-card-actions>
+  <mat-card-footer>
+  </mat-card-footer>
+</mat-card>
