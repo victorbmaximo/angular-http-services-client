@@ -19,6 +19,8 @@ export class AppComponent {
 
   simpleReqProductObs$: Observable<Product[]>;
   ProductsError: Product[];
+  bLoading: boolean = false;
+  productsIds: Product[];
 
   ngOnInit() {
 
@@ -34,9 +36,11 @@ export class AppComponent {
   }
 
   getWithError() {
+    this.bLoading = true;
     this.productService.getProductsErr().subscribe(
       (prods) => {
         this.ProductsError = prods;
+        this.bLoading = false;
       },
       (err) => {
         let config = new MatSnackBarConfig();
@@ -48,15 +52,19 @@ export class AppComponent {
         } else {
           this.snackBar.open(err.error.msg, '', config);
         }
+
+        this.bLoading = false;
       }
     );
   }
 
   getWithErrorOk() {
+    this.bLoading = true;
+
     this.productService.getProductsDelay().subscribe(
       (prods) => {
         this.ProductsError = prods;
-
+        this.bLoading = false;
         let config = new MatSnackBarConfig();
         config.duration = 2000;
         config.panelClass = ['snack_ok'];
@@ -65,8 +73,17 @@ export class AppComponent {
       },
       (err) => {
         console.log(err);
+        this.bLoading = false;
       }
     );
+  }
+
+  getProductsIds() {
+
+  }
+
+  loadName(id: string) {
+
   }
 
 }
