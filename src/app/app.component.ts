@@ -79,11 +79,23 @@ export class AppComponent {
   }
 
   getProductsIds() {
-
+    this.productService.getProductsIds().subscribe(
+      (ids) => {
+        this.productsIds = ids.map(id => ({_id: id, name: '', department: '', price: 0}));
+      }
+    );
   }
 
   loadName(id: string) {
+    this.productService.getProductName(id).subscribe(
+      name => {
+       let index = this.productsIds.findIndex(p => p._id === id)
+       if(index >= 0) {
+         this.productsIds[index].name = name;
+       }
 
+      }
+    );
   }
 
 }

@@ -72,8 +72,8 @@
         <h4 mat-line *ngIf="p.name == ''">
           {{i}}
         </h4>
-        <button mat-icon-button (click)="loadName(p._id)">
-          refresh
+        <button mat-icon-button (click)="loadName(p._id)" *ngIf="p.name == ''">
+          <mat-icon>refresh</mat-icon>
         </button>
       </mat-list-item>
     </mat-list>
