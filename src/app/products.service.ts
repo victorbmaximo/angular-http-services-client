@@ -32,4 +32,8 @@ export class ProductsService {
   getProductName(id: string): Observable<string> {
     return this.http.get(`${this.url}/products/name/${id}`, {responseType: "text"});
   }
+
+  saveProduct(newProduct: Product): Observable<Product> {
+    return this.http.post<Product>(`${this.url}/products`, newProduct);
+  }
 }

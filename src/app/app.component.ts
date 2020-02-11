@@ -21,6 +21,7 @@ export class AppComponent {
   ProductsError: Product[];
   bLoading: boolean = false;
   productsIds: Product[];
+  newlyProducts: Product[] = [];
 
   ngOnInit() {
 
@@ -96,6 +97,35 @@ export class AppComponent {
 
       }
     );
+  }
+
+  saveProduct(name: string, department: string, price: number) {
+    this.bLoading = true;
+    let newProduct = {name, department, price}
+
+    this.productService.saveProduct(newProduct).subscribe(
+      (p: Product) => {
+
+        console.log(p)
+        this.newlyProducts.push(newProduct);
+        this.bLoading = false;
+
+      }, (err) => {
+
+        let config = new MatSnackBarConfig();
+        config.duration = 2000;
+        config.panelClass = ['snack_error'];
+
+        if(err.status == 0) {
+          this.snackBar.open('Could not connect to the server', '', config);
+        } else {
+          this.snackBar.open(err.error.msg, '', config);
+        }
+
+        this.bLoading = false;
+
+      }
+    )
   }
 
 }
